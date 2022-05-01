@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity(),
             pageMargin = resources.getDimension(R.dimen.card_padding).toInt() / 4
             offscreenPageLimit = 3
         }
-        binding.mainCardsPagerIndicator.setViewPager(binding.mainCardsViewPager)
     }
 
     override fun onCardAction(actionId: Int) {
