@@ -18,22 +18,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+}
 
-    afterEvaluate {
-        publishing {
-            publications {
-                release(MavenPublication) {
-                    from components.release
-                    // You can then customize attributes of the publication as shown below.
-                    groupId = 'com.github.xavier-tobin'
-                    artifactId = 'stfalcon-imageviewer'
-                    version = '1.0.6'
-                }
-
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                // You can then customize attributes of the publication as shown below.
+                groupId = 'com.github.xavier-tobin'
+                artifactId = 'stfalcon-imageviewer'
+                version = '1.0.6'
             }
+
         }
     }
-
 }
 
 dependencies {
