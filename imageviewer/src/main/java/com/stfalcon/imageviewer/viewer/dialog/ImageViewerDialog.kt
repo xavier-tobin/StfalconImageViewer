@@ -53,8 +53,9 @@ internal class ImageViewerDialog<T>(
                 setOnDismissListener { builderData.onDismissListener?.onDismiss() }
             }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if (builderData.shouldStatusBarTransparent) {
-                dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            if (dialog.window != null && builderData.shouldStatusBarTransparent) {
+                dialog.window!!.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+                WindowCompat.setDecorFitsSystemWindows(dialog.window!!, false)
             }
         }
     }
