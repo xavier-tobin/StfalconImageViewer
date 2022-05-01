@@ -1,25 +1,29 @@
 package com.stfalcon.sample.features.demo.grid
 
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.ColorUtils
 import com.stfalcon.imageviewer.StfalconImageViewer
 import com.stfalcon.sample.R
 import com.stfalcon.sample.common.extensions.getDrawableCompat
 import com.stfalcon.sample.common.extensions.loadImage
 import com.stfalcon.sample.common.models.Demo
 import com.stfalcon.sample.common.models.Poster
-import kotlinx.android.synthetic.main.activity_demo_posters_grid.*
+import com.stfalcon.sample.databinding.ActivityDemoPostersGridBinding
 
 class PostersGridDemoActivity : AppCompatActivity() {
 
     private lateinit var viewer: StfalconImageViewer<Poster>
+    lateinit var binding: ActivityDemoPostersGridBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_demo_posters_grid)
+        binding = ActivityDemoPostersGridBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        postersGridView.apply {
+        binding.postersGridView.apply {
             imageLoader = ::loadPosterImage
             onPosterClick = ::openViewer
         }
@@ -29,8 +33,9 @@ class PostersGridDemoActivity : AppCompatActivity() {
         viewer = StfalconImageViewer.Builder<Poster>(this, Demo.posters, ::loadPosterImage)
             .withStartPosition(startPosition)
             .withTransitionFrom(target)
+                .withBackgroundColor(ColorUtils.setAlphaComponent(Color.BLACK, 50))
             .withImageChangeListener {
-                viewer.updateTransitionImage(postersGridView.imageViews[it])
+                viewer.updateTransitionImage(binding.postersGridView.imageViews[it])
             }
             .show()
     }

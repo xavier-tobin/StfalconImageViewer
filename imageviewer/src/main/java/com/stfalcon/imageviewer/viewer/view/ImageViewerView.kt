@@ -125,6 +125,7 @@ internal class ImageViewerView<T> @JvmOverloads constructor(
 
     init {
         View.inflate(context, R.layout.view_image_viewer, this)
+        fitsSystemWindows = false
 
         rootContainer = findViewById(R.id.rootContainer)
         backgroundView = findViewById(R.id.backgroundView)

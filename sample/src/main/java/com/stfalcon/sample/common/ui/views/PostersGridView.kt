@@ -2,13 +2,12 @@ package com.stfalcon.sample.common.ui.views
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
+import android.view.LayoutInflater
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.stfalcon.sample.R
 import com.stfalcon.sample.common.models.Demo
 import com.stfalcon.sample.common.models.Poster
-import kotlinx.android.synthetic.main.view_posters_grid.view.*
+import com.stfalcon.sample.databinding.ViewPostersGridBinding
 
 class PostersGridView @JvmOverloads constructor(
     context: Context,
@@ -18,22 +17,23 @@ class PostersGridView @JvmOverloads constructor(
 
     var imageLoader: ((ImageView, Poster?) -> Unit)? = null
     var onPosterClick: ((Int, ImageView) -> Unit)? = null
+    lateinit var binding: ViewPostersGridBinding
 
     val imageViews by lazy {
-        mapOf<Int, ImageView>(
-            0 to postersFirstImage,
-            1 to postersSecondImage,
-            2 to postersThirdImage,
-            3 to postersFourthImage,
-            4 to postersFifthImage,
-            5 to postersSixthImage,
-            6 to postersSeventhImage,
-            7 to postersEighthImage,
-            8 to postersNinthImage)
+        mapOf(
+            0 to binding.postersFirstImage,
+            1 to binding.postersSecondImage,
+            2 to binding.postersThirdImage,
+            3 to binding.postersFourthImage,
+            4 to binding.postersFifthImage,
+            5 to binding.postersSixthImage,
+            6 to binding.postersSeventhImage,
+            7 to binding.postersEighthImage,
+            8 to binding.postersNinthImage)
     }
 
     init {
-        View.inflate(context, R.layout.view_posters_grid, this)
+        binding = ViewPostersGridBinding.inflate(LayoutInflater.from(context), this)
     }
 
     override fun onAttachedToWindow() {

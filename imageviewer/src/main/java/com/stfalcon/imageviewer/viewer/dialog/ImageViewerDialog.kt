@@ -27,6 +27,7 @@ import com.stfalcon.imageviewer.R
 import com.stfalcon.imageviewer.viewer.builder.BuilderData
 import com.stfalcon.imageviewer.viewer.view.ImageViewerView
 
+
 internal class ImageViewerDialog<T>(
     context: Context,
     private val builderData: BuilderData<T>
@@ -44,7 +45,7 @@ internal class ImageViewerDialog<T>(
 
     init {
         setupViewerView()
-        dialog = AlertDialog
+        dialog = ImprovedAlertDialog
             .Builder(context, dialogStyle)
             .setView(viewerView)
             .setOnKeyListener { _, keyCode, event -> onDialogKeyEvent(keyCode, event) }
@@ -53,11 +54,10 @@ internal class ImageViewerDialog<T>(
                 setOnShowListener { viewerView.open(builderData.transitionView, animateOpen) }
                 setOnDismissListener { builderData.onDismissListener?.onDismiss() }
             }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if (dialog.window != null && builderData.shouldStatusBarTransparent) {
+            if (dialog.window != null) {
                 WindowCompat.setDecorFitsSystemWindows(dialog.window!!, false)
             }
-        }
+
     }
 
     fun show(animate: Boolean) {
