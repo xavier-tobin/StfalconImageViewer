@@ -54,7 +54,6 @@ internal class ImageViewerDialog<T>(
             }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if (dialog.window != null && builderData.shouldStatusBarTransparent) {
-                dialog.window!!.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
                 WindowCompat.setDecorFitsSystemWindows(dialog.window!!, false)
             }
         }
