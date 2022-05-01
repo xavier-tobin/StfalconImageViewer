@@ -37,20 +37,39 @@ dependencies {
     implementation "androidx.core:core-ktx:1.8.0-beta01"
 }
 
-publishing {
-    publications {
-        release(MavenPublication) {
-            // You can then customize attributes of the publication as shown below.
-            groupId = 'com.github.xavier-tobin'
-            artifactId = 'stfalcon-imageviewer'
-            version = '1.0.6'
-            afterEvaluate {
-                from components.release
-            }
-        }
-    }
+task androidSourcesJar(type: Jar) {
+    classifier 'sources'
+    from android.sourceSets.main.java.srcDirs
 }
 
+        afterEvaluate {
+            publishing {
+                publications {
+                    release(MavenPublication) {
+                        groupId = 'com.github.xavier-tobin'
+                        artifactId = 'stfalcon-imageviewer'
+                        version = '1.0.6'
+                        from components.release
+                        artifact androidSourcesJar // optional sources
+                    }
+                }
+            }
+        }
+
+//publishing {
+//    publications {
+//        release(MavenPublication) {
+//            // You can then customize attributes of the publication as shown below.
+//            groupId = 'com.github.xavier-tobin'
+//            artifactId = 'stfalcon-imageviewer'
+//            version = '1.0.6'
+//            afterEvaluate {
+//                from components.release
+//            }
+//        }
+//    }
+//}
+//
 
 // Avoid Kotlin docs error
 tasks.withType(Javadoc) {
